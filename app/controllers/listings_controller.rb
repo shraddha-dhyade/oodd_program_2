@@ -14,7 +14,8 @@ class ListingsController < ApplicationController
 
   # GET /listings/new
   def new
-    @listing = Listing.new
+    @listing = current_user.listings.build
+    @companies = Company.all.map{|c| [c.name, c.id]}
   end
 
   # GET /listings/1/edit
@@ -24,7 +25,7 @@ class ListingsController < ApplicationController
   # POST /listings
   # POST /listings.json
   def create
-    @listing = Listing.new(listing_params)
+    @listing = current_user.listings.build(listing_params)
 
     respond_to do |format|
       if @listing.save
