@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @listing.location %>
+</p>
+
+<p>
+  <strong>Square footage:</strong>
+  <%= @listing.square_footage %>
+</p>
+
+<p>
+  <strong>Year built:</strong>
+  <%= @listing.year_built %>
+</p>
+
+<p>
+  <strong>Style:</strong>
+  <%= @listing.style %>
+</p>
+
+<p>
+  <strong>List price:</strong>
+  <%= @listing.list_price %>
+</p>
+
+<p>
+  <strong>Floors:</strong>
+  <%= @listing.floors %>
+</p>
+
+<p>
+  <strong>Basement:</strong>
+  <%= @listing.basement %>
+</p>
+
+<p>
+  <strong>Current house owner:</strong>
+  <%= @listing.current_house_owner %>
+</p>
+
+<p>
+  <strong>Contact:</strong>
+  <%= @listing.contact %>
+</p>
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>
