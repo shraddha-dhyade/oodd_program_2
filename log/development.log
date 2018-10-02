@@ -870,3 +870,14 @@ Processing by UsersController#new as HTML
 Completed 200 OK in 311ms (Views: 260.0ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/" for 127.0.0.1 at 2018-10-01 22:58:48 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ C:/Ruby24-x64/lib/ruby/gems/2.4.0/gems/activerecord-5.2.1/lib/active_record/log_subscriber.rb:98
+Processing by CompaniesController#index as HTML
+  Rendering companies/index.html.erb within layouts/application
+  [1m[36mCompany Load (0.0ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/views/companies/index.html.erb:18
+  Rendered companies/index.html.erb within layouts/application (38.1ms)
+Completed 200 OK in 586ms (Views: 567.1ms | ActiveRecord: 0.0ms)
+
+
