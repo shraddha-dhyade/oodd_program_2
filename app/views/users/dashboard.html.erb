@@ -1,6 +1,36 @@
 <h1>Users#dashboard</h1>
 <p>Find me in app/views/users/dashboard.html.erb</p>
-<%= link_to 'List Users', users_path %>
-<%= link_to 'List Companies', companies_path %>
-<%= link_to 'List of Enquires', enquiries_path %>
-<%= link_to 'List Listings', listings_path %>
+<p><%= "You are logged in as #{current_user.role}" %></p>
+
+<% if current_user.role == "admin" %>
+  <p><%= link_to 'List Users', users_path %></p>
+  <p><%= link_to 'Update My Profile', edit_user_registration_path %></p>
+  <p><%= link_to 'List Companies', companies_path %></p>
+  <p><%= link_to 'List of Enquires', enquiries_path %></p>
+  <p><%= link_to 'List Listings', listings_path %></p>
+  <%= link_to 'CREATE NEW  User: Realtor or House Hunter', new_user_path %>
+
+<% elsif current_user.role == "house_hunter"  %>
+  <p><%= link_to 'List of Enquires', enquiries_path %></p>
+  <p><%= link_to 'List Listings', listings_path %></p>
+  <p><%= link_to 'List Companies', companies_path %></p>
+  <p><%= link_to 'Update My Profile', edit_user_registration_path %></p>
+
+
+<% elsif current_user.role == "realtor"  %>
+  <p><%= link_to 'Update My Profile', edit_user_registration_path %></p>
+  <% if current_user.company_id %>
+    <p><%= link_to 'Edit My company Information', edit_company_path(current_user.company_id) %></p>
+    <p><%= link_to 'New Listing', new_listing_path %></p>
+    <p><%= link_to 'List Listings', listings_path %></p>
+    <p><%= link_to 'List of Enquires', enquiries_path %></p>
+  <% else %>
+    <p>Note: To get you started</p>
+    <p>      Add a Company to your profile from Update profile Section</p>
+    <p><%= link_to 'List Listings', listings_path %></p>
+  <% end %>
+
+
+
+
+<% end %>

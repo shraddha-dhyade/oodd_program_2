@@ -1,6 +1,40 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listings</h1>
+<div class = "row">
+  <div class="pull-right range-query">
+    <%= form_tag listings_path, method: :get do %>
+      <%= text_field_tag 'search[location]', @search.location %>
+      <%= submit_tag "Search by location", class: "btn search-button"  %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<div class = "row">
+  <div class="pull-right range-query">
+    <%= form_tag listings_path, method: :get do %>
+      <%=number_field_tag 'search[price_from]', @search.price_from  %>
+      <%=number_field_tag 'search[price_to]', @search.price_to  %>
+      <%= submit_tag "Search by price", class: "btn search-button" %>
+    <%end %>
+  </div>
+</div>
+
+<div class = "row">
+  <div class="pull-right range-query">
+    <%= form_tag listings_path, method: :get do %>
+      <%=number_field_tag 'search[square_footage_from]', @search.square_footage_from  %>
+      <%=number_field_tag 'search[square_footage_to]', @search.square_footage_to  %>
+      <%= submit_tag "Search by Square Footage", class: "btn search-button" %>
+    <%end %>
+  </div>
+</div>
+
+
+
+
 
 <table>
   <thead>
@@ -30,9 +64,22 @@
         <td><%= listing.basement %></td>
         <td><%= listing.current_house_owner %></td>
         <td><%= listing.contact %></td>
-        <td><%= link_to 'Show', listing %></td>
-        <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
-        <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.role == "admin" %>
+          <td><%= link_to 'Show', listing %></td>
+          <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
+          <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%elsif current_user.role == "realtor" %>
+          <td><%= link_to 'Show', listing %></td>
+          <%if current_user.id == listing.user_id and current_user.company_id == listing.company_id %>
+            <td><%= link_to 'Edit', edit_listing_path(listing) %></td>
+            <td><%= link_to 'Destroy', listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
+        <%elsif current_user.role == "house_hunter" %>
+          <td><%= link_to 'Show', listing %></td>
+        <%end %>
+
+
+
       </tr>
     <% end %>
   </tbody>
@@ -40,4 +87,6 @@
 
 <br>
 
-<%= link_to 'New Listing', new_listing_path %>
+<% if  current_user.role == "realtor" or current_user.role == "admin"%>
+  <%= link_to 'New Listing', new_listing_path %>
+<% end %>

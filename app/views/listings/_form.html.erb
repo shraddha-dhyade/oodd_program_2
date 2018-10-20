@@ -55,7 +55,11 @@
     <%= form.label :contact %>
     <%= form.number_field :contact %>
   </div>
-  <%= select_tag(:company_id  , options_for_select(@companies), :prompt => "Select from Company")  %>
+
+
+  <p><%= select_tag(:company_id  , options_for_select(@companies), :prompt => "Select from Company")  %></p>
+  <p><%= form.file_field :listing_img %></p>
+
   <div class="actions">
     <%= form.submit %>
   </div>

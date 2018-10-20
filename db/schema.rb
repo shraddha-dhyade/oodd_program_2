@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_212845) do
+ActiveRecord::Schema.define(version: 2018_10_10_130645) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.integer "commentable_id"
+    t.string "commentable_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -29,6 +37,8 @@ ActiveRecord::Schema.define(version: 2018_09_29_212845) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "listing_id"
+    t.index ["listing_id"], name: "index_enquiries_on_listing_id"
     t.index ["user_id"], name: "index_enquiries_on_user_id"
   end
 
@@ -46,6 +56,10 @@ ActiveRecord::Schema.define(version: 2018_09_29_212845) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "company_id"
+    t.string "listing_img_file_name"
+    t.string "listing_img_content_type"
+    t.bigint "listing_img_file_size"
+    t.datetime "listing_img_updated_at"
     t.index ["company_id"], name: "index_listings_on_company_id"
     t.index ["user_id"], name: "index_listings_on_user_id"
   end
@@ -66,6 +80,9 @@ ActiveRecord::Schema.define(version: 2018_09_29_212845) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.integer "company_id"
+    t.string "role"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

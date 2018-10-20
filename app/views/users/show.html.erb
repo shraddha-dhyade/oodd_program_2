@@ -19,6 +19,9 @@
   <strong>Phone:</strong>
   <%= @user.phone %>
 </p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<% if current_user.role == "admin" %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+<% else %>
+  <%= link_to 'Back', users_path %>
+<% end %>

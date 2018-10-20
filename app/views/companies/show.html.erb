@@ -24,6 +24,11 @@
   <strong>Synopsis:</strong>
   <%= @company.synopsis %>
 </p>
+<% if  current_user.role == "house_hunter" or current_user.role == "realtor" %>
+  <%= link_to 'Back', companies_path %>
+<%else %>
+  <%= link_to 'Edit', edit_company_path(@company) %> |
+  <%= link_to 'Back', companies_path %>
+<%end %>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+

@@ -23,12 +23,28 @@
 
   <div class="field">
     <%= form.label :password %>
-    <%= form.text_field :password %>
+    <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= form.password_field :password, autocomplete: "new-password" %>
   </div>
+  <div class="field">
+    <%= form.label :password_confirmation %><br />
+    <%= form.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+
+
 
   <div class="field">
     <%= form.label :phone %>
     <%= form.number_field :phone %>
+  </div>
+
+  <div class="field">
+    <%= form.label :role %>
+    <%= form.radio_button :role, 'realtor' %> Realtor<br />
+    <%= form.radio_button :role, 'house_hunter' %> House Hunter<br />
   </div>
 
   <div class="actions">

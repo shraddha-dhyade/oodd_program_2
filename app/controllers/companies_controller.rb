@@ -1,6 +1,7 @@
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-
+  protect_from_forgery prepend: true
+  before_action :authenticate_user!
   # GET /companies
   # GET /companies.json
   def index

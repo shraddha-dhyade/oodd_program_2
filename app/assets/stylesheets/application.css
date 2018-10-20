@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+.listing-show{
+    height: 350px;
+    width: 350px;
+}

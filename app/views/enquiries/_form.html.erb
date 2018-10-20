@@ -20,6 +20,7 @@
     <%= form.label :message_content %>
     <%= form.text_area :message_content %>
   </div>
+  <p><%= select_tag(:listing_id, options_for_select(@listings), :prompt => "Select from Listings")  %></p>
 
   <div class="actions">
     <%= form.submit %>

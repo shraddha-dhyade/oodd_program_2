@@ -22,14 +22,25 @@
         <td><%= company.size %></td>
         <td><%= company.revenue %></td>
         <td><%= company.synopsis %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if  current_user.role == "house_hunter"  %>
+          <td><%= link_to 'Show', company %></td>
+        <%elsif current_user.role == "realtor"   %>
+          <td><%= link_to 'Show', company %></td>
+          <%if current_user.company_id == company.id %>
+            <td><%= link_to 'Edit', edit_company_path(company) %></td>
+          <%end %>
+        <%else %>
+          <td><%= link_to 'Show', company %></td>
+          <td><%= link_to 'Edit', edit_company_path(company) %></td>
+          <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end %>
+
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Company', new_company_path %>
+<% if  current_user.role == "admin"  %>
+  <%= link_to 'New Company', new_company_path %>
+<%end %>

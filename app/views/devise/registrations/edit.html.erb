@@ -22,6 +22,17 @@
   </div>
 
   <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone %>
+    <%= f.number_field :phone %>
+  </div>
+
+
+  <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
@@ -30,14 +41,21 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
+  <% if current_user.role == "realtor" %>
+    <%= f.select :company_id, Company.all.map{|c| [c.name,c.id]}, :prompt => "Select a company" %>
+    <p>Or you can Create a new company by visiting the below link</p>
+    <p><%= link_to 'New Company', new_company_path %></p>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<% if current_user.role != "admin" %>
+  <h3>Cancel my account</h3>
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
+<% end %>
 <%= link_to "Back", :back %>
