@@ -4,7 +4,7 @@ Property Hub Preconfigured
 ---
 Welcome to Property Hub - A House Selling and Buying Tracking System
 
-Link to the application - 
+Link to the application is [here](https://morning-savannah-83555.herokuapp.com) 
 
 We have a preconfigured admin for the application
 
